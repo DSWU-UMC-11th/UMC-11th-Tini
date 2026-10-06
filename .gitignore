@@ -1,0 +1,10 @@
+node_modules/
+dist/
+build/
+out/
+.gradle/
+.idea/
+*.class
+.DS_Store
+.env
+application-secret.yml
