@@ -1,11 +1,12 @@
 package com.umc.study.service;
 
+import com.umc.study.dto.BookResponse;
 import com.umc.study.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -13,16 +14,10 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
-    public List<Map<String, Object>> getAllBooks() {
-        return bookRepository.findAll();
-    }
-
-    public void createBook(Map<String, Object> body) {
-        bookRepository.save(body);
-    }
-
-    // 미션 1
-    public List<Map<String, Object>> getBooksByCategory(Long categoryId) {
-        return bookRepository.findByCategory(categoryId);
+    @Transactional(readOnly = true)
+    public List<BookResponse> getBooks() {
+        return bookRepository.findAllByOrderByBookIdDesc().stream()
+                .map(BookResponse::from)
+                .toList();
     }
 }
