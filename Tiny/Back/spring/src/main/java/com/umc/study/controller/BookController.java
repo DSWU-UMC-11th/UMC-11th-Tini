@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,8 +24,8 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public List<BookResponse> getBooks() {
-        return bookService.getBooks();
+    public List<BookResponse> getBooks(@RequestParam(required = false) String keyword) {
+        return bookService.getBooks(keyword);
     }
 
     @PostMapping
