@@ -1,12 +1,18 @@
-import {createRootRoute, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { Footer } from "../components/layout/footer";
 import { Header } from "../components/layout/header";
 
 export const Route = createRootRoute({
-    component: () => (
-        <>
-        <Header />
+  component: () => (
+    <div className="flex min-h-screen flex-col bg-gray-50">
+      <Header />
+      <div className="flex-1">
         <Outlet />
-        </>
-    ),
-    notFoundComponent: () => <main>페이지를 찾을 수 없어요.</main>,
+      </div>
+      <Footer />
+    </div>
+  ),
+  notFoundComponent: () => (
+    <main className="px-4 py-8 sm:px-10">페이지를 찾을 수 없어요.</main>
+  ),
 });
